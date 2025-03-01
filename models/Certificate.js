@@ -13,7 +13,7 @@ const CertificateSchema = new mongoose.Schema({
     max: 5, 
   }, 
 
-  officialSite: { type: String, required: false } // 공식 사이트 (선택 사항)
+  officialSite: { type: String, required: false } 
 });
 
 module.exports = mongoose.model("Certificate", CertificateSchema);

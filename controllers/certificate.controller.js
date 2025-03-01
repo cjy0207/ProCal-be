@@ -2,7 +2,6 @@ const Certificate = require("../models/Certificate");
 
 const certificateController = {};
 
-// 자격증 추가
 certificateController.createCertificate = async (req, res) => {
   try {
     const { name, examDate, eligibility, passingCriteria, difficulty, officialSite } = req.body;
@@ -22,7 +21,6 @@ certificateController.createCertificate = async (req, res) => {
   }
 };
 
-// 모든 자격증 조회
 certificateController.getAllCertificates = async (req, res) => {
   try {
     const certificates = await Certificate.find();
@@ -32,7 +30,6 @@ certificateController.getAllCertificates = async (req, res) => {
   }
 };
 
-// 특정 자격증 조회
 certificateController.getCertificateById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -44,7 +41,6 @@ certificateController.getCertificateById = async (req, res) => {
   }
 };
 
-// 특정 자격증 수정
 certificateController.updateCertificate = async (req, res) => {
   try {
     const { id } = req.params;
@@ -56,7 +52,6 @@ certificateController.updateCertificate = async (req, res) => {
   }
 };
 
-// 특정 자격증 삭제
 certificateController.deleteCertificate = async (req, res) => {
   try {
     const { id } = req.params;

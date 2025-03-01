@@ -13,7 +13,6 @@ authController.loginWithEmail = async (req, res) => {
     if (user) {
       const isMatch = await bcrypt.compare(password, user.password);
       if (isMatch) {
-        //create token
         const token = await user.generateToken();
         return res.status(200).json({ status: "success", user, token });
       }
@@ -37,7 +36,7 @@ authController.authenticate = async (req, res, next) => {
       }
       req.userId = payload._id;
     });
-    next(); // jwt.verify 콜백 외부로 이동
+    next(); 
   } catch (error) {
     res.status(400).json({ status: "fail", error: error.message });
   }

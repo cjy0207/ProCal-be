@@ -2,11 +2,10 @@ const Memo = require("../models/Memo");
 
 const memoController = {};
 
-// 1️⃣ 특정 날짜에 메모 추가
 memoController.createMemo = async (req, res) => {
   try {
     const { title, content, createdAt } = req.body;
-    const userId = req.userId; // ⬅️ JWT 인증 미들웨어에서 설정됨
+    const userId = req.userId;
 
     if (!title || !content || !createdAt) {
       throw new Error("Title, content, and createdAt (date) are required");
@@ -24,7 +23,6 @@ memoController.createMemo = async (req, res) => {
   }
 };
 
-// 2️⃣ 특정 사용자의 전체 메모 조회
 memoController.getUserMemos = async (req, res) => {
   try {
     const userId = req.userId;
@@ -36,7 +34,6 @@ memoController.getUserMemos = async (req, res) => {
   }
 };
 
-// 3️⃣ 특정 날짜(YYYY-MM-DD)의 메모 조회
 memoController.getMemosByDate = async (req, res) => {
   try {
     const userId = req.userId;
@@ -59,7 +56,6 @@ memoController.getMemosByDate = async (req, res) => {
   }
 };
 
-// 4️⃣ 특정 메모 조회 (메모 ID로 조회)
 memoController.getMemoById = async (req, res) => {
   try {
     const userId = req.userId;
@@ -74,7 +70,6 @@ memoController.getMemoById = async (req, res) => {
   }
 };
 
-// 5️⃣ 특정 메모 수정
 memoController.updateMemo = async (req, res) => {
   try {
     const userId = req.userId;
@@ -94,7 +89,6 @@ memoController.updateMemo = async (req, res) => {
   }
 };
 
-// 6️⃣ 특정 메모 삭제
 memoController.deleteMemo = async (req, res) => {
   try {
     const userId = req.userId;

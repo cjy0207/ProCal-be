@@ -3,11 +3,10 @@ const Schedule = require("../models/Schedule");
 
 const scheduleController = {};
 
-// 1️⃣ 특정 날짜에 일정 추가
 scheduleController.createSchedule = async (req, res) => {
   try {
     const { title, date, description, certificateId } = req.body;
-    const userId = req.userId; // `authController.authenticate` 미들웨어에서 설정됨
+    const userId = req.userId; 
 
     if (!title || !date) {
       throw new Error("Title and date are required");
@@ -16,7 +15,6 @@ scheduleController.createSchedule = async (req, res) => {
     const scheduleDate = new Date(date);
     scheduleDate.setHours(0, 0, 0, 0);
 
-    // certificateId를 유효한 ObjectId로 변환
     let certificateObjectId = null;
     if (certificateId) {
       if (!mongoose.Types.ObjectId.isValid(certificateId)) {
@@ -41,7 +39,6 @@ scheduleController.createSchedule = async (req, res) => {
   }
 };
 
-// 2️⃣ 특정 사용자의 전체 일정 조회
 scheduleController.getUserSchedules = async (req, res) => {
   try {
     const userId = req.userId;
@@ -53,7 +50,6 @@ scheduleController.getUserSchedules = async (req, res) => {
   }
 };
 
-// 3️⃣ 특정 날짜(YYYY-MM-DD)의 일정 조회
 scheduleController.getSchedulesByDate = async (req, res) => {
   try {
     const userId = req.userId;
@@ -76,7 +72,6 @@ scheduleController.getSchedulesByDate = async (req, res) => {
   }
 };
 
-// 4️⃣ 특정 일정 조회 (일정 ID로 조회)
 scheduleController.getScheduleById = async (req, res) => {
   try {
     const userId = req.userId;
@@ -91,7 +86,6 @@ scheduleController.getScheduleById = async (req, res) => {
   }
 };
 
-// 5️⃣ 특정 일정 수정
 scheduleController.updateSchedule = async (req, res) => {
   try {
     const userId = req.userId;
@@ -120,7 +114,6 @@ scheduleController.updateSchedule = async (req, res) => {
   }
 };
 
-// 6️⃣ 특정 일정 삭제
 scheduleController.deleteSchedule = async (req, res) => {
   try {
     const userId = req.userId;
