@@ -1,16 +1,16 @@
+const mongoose = require("mongoose");
 const Certificate = require("../models/Certificate");
 
 const certificateController = {};
 
 certificateController.createCertificate = async (req, res) => {
   try {
-    const { name, examDate, eligibility, passingCriteria, difficulty, officialSite } = req.body;
+    const { name, examDate, eligibility, passingCriteria, officialSite } = req.body; // ✅ difficulty 제거
     const newCertificate = new Certificate({
       name,
       examDate,
       eligibility,
       passingCriteria,
-      difficulty,
       officialSite,
     });
 
