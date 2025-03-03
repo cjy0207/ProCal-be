@@ -6,20 +6,25 @@ const reviewController = {};
 reviewController.createReview = async (req, res) => {
   try {
     const userId = req.userId;
-    const { certificateId, content } = req.body;
+    const { certificateId, content, difficulty } = req.body;
 
-    if (!certificateId || !content) {
-      throw new Error("CertificateId and content are required");
+    if (!certificateId || !content || difficulty === undefined) {
+      throw new Error("CertificateId, content, and difficulty are required");
     }
 
     if (!mongoose.Types.ObjectId.isValid(certificateId)) {
       throw new Error("Invalid certificateId format");
     }
 
+    if (difficulty < 1 || difficulty > 5) {
+      throw new Error("Difficulty must be between 1 and 5");
+    }
+
     const newReview = new Review({
       userId,
       certificateId,
-      content
+      content,
+      difficulty
     });
 
     await newReview.save();
@@ -68,15 +73,19 @@ reviewController.updateReview = async (req, res) => {
   try {
     const userId = req.userId;
     const { reviewId } = req.params;
-    const { content } = req.body;
+    const { content, difficulty } = req.body;
 
     if (!mongoose.Types.ObjectId.isValid(reviewId)) {
       throw new Error("Invalid reviewId format");
     }
 
+    if (difficulty !== undefined && (difficulty < 1 || difficulty > 5)) {
+      throw new Error("Difficulty must be between 1 and 5");
+    }
+
     const updatedReview = await Review.findOneAndUpdate(
       { _id: reviewId, userId },
-      { content },
+      { content, difficulty },
       { new: true }
     );
 

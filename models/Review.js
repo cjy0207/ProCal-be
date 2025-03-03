@@ -6,6 +6,12 @@ const ReviewSchema = new mongoose.Schema({
   content: { type: String, required: true }, 
   createdAt: { type: Date, default: Date.now }, 
   adminComment: { type: String, default: "" }, 
+  difficulty: { 
+    type: Number, 
+    required: true,
+    min: 1, 
+    max: 5, 
+  }, 
   isDeleted: { type: Boolean, default: false } 
 });
 
